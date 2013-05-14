@@ -3,7 +3,7 @@ var _ = require('underscore');
 var mysql = require('mysql');
 var argv = require('optimist').argv;
 
-var config = require('./config');
+
 
 if (!_.isUndefined(argv.help)){
     console.log("Usage: obfuscate_mysql [OPTIONS] --database <database> --config <path/to/config.json>");
@@ -58,13 +58,26 @@ if (!_.isUndefined(argv.help)){
 }
 
 
+
+
 var commandline_host = _.isUndefined(argv.host) ? 'localhost' : argv.host;
 var commandline_user = _.isUndefined(argv.username) ? 'root' : argv.username;
 var commandline_pass = _.isUndefined(argv.password) ? '' : argv.password;
-var commandline_database = null;
+var commandline_configfile = null;
+if (_.isUndefined(argv.config)) {
+    console.log("the --config command line parameter is required.")
+    process.exit(1);
+} else {
+    commandline_configfile = argv.config;
+}
+var config = require(commandline_configfile);
 
+var commandline_database = null;
 if (_.isUndefined(argv.database)) {
     console.log("the --database command line parameter is required.")
+    process.exit(1);
+} else {
+    commandline_database = argv.database;
 }
 
 var connection = mysql.createConnection({
@@ -123,8 +136,13 @@ function obfuscate() {
                             var property = tblConf[col].split('.')[1];
 
                             var fakeFile = require("./" + filename);
+                            var fakeFileIndex = k
+                            if (fakeFile.length - 1 < k) {
+                                fakeFileIndex -= fakeFile.length;
+                            }
+                            console.log("fakeFileIndex: %d", fakeFileIndex)
 
-                            updateSql += col + " = " + connection.escape(fakeFile[k][property]);
+                            updateSql += col + " = " + connection.escape(fakeFile[fakeFileIndex][property]);
                         } else {
                             updateSql += col + " = null"
                         }
