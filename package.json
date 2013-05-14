@@ -1,8 +1,13 @@
 {
     "name": "obfuscate_mysql",
+    "homepage": "http://github.com/gordlea/obfuscate_mysql",
+    "author": {
+        "name": "Gord Lea",
+        "url": "http://github.com/gordlea"
+    },
     "description": "A simple util to obfuscate data in a mysql database. Currently only has ability to fake addresses and people. Probably won't be useful to anyone without editing source.",
     "author": "Gord Lea <gord@10sheet.com>",
-    "version": "0.0.1",
+    "version": "0.0.1-alpha",
     "dependencies": {
         "mysql": "2.0.0-alpha8",
 		"optimist": "0.4.0",
@@ -10,5 +15,20 @@
     },
     "devDependencies":{
         "nodeunit":"0.8.0"
+    },
+    "bin": {
+        "obfuscate_mysql": "./app.js"
+    },
+    "main": "./obfuscate_mysql",
+    "preferGlobal": "true",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://rem.mit-license.org"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/gordlea/obfuscate_mysql.git"
     }
 }
