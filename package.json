@@ -1,0 +1,14 @@
+{
+    "name": "obfuscate_mysql",
+    "description": "A simple util to obfuscate data in a mysql database. Currently only has ability to fake addresses and people. Probably won't be useful to anyone without editing source.",
+    "author": "Gord Lea <gord@10sheet.com>",
+    "version": "0.0.1",
+    "dependencies": {
+        "mysql": "2.0.0-alpha8",
+		"optimist": "0.4.0",
+		"underscore": "1.4.4"
+    },
+    "devDependencies":{
+        "nodeunit":"0.8.0"
+    }
+}

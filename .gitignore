@@ -1,0 +1,4 @@
+.idea
+.dejavurc
+node_modules/
+*.iml
