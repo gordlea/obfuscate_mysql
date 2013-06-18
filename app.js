@@ -140,7 +140,7 @@ function obfuscate() {
                             if (fakeFile.length - 1 < k) {
                                 fakeFileIndex -= fakeFile.length;
                             }
-                            console.log("fakeFileIndex: %d", fakeFileIndex)
+//                            console.log("fakeFileIndex: %d", fakeFileIndex)
 
                             updateSql += col + " = " + connection.escape(fakeFile[fakeFileIndex][property]);
                         } else {

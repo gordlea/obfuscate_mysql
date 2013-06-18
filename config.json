@@ -29,12 +29,14 @@
     },{
         "name": "Person",
         "configs": [{
-            "where": "",
+            "where": "PersonEmail NOT LIKE '%10sheet%'",
             "id": "PersonId",
             "PersonFirstName": "fake_person.GivenName",
             "PersonLastName": "fake_person.Surname",
             "company": "fake_person.Company",
-            "phone": "fake_person.TelephoneNumber"
+            "phone": "fake_person.TelephoneNumber",
+            "PersonPasswordHash": "fake_person.PasswordHash",
+            "PersonEmail": "fake_person.PersonEmail"
         }]
     }]
 }
