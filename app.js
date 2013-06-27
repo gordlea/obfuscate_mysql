@@ -115,6 +115,7 @@ function obfuscate() {
             var tableIdCol = tableConfig.id;
 
             var querySql = 'SELECT \'' + i + '_' + j + '\' as tableConfig, ' + tableIdCol + ' FROM ' + tableName + '' + (whereClause === '' ? '' : ' WHERE ' + whereClause) + ";";
+            console.log(querySql);
             connection.query(querySql, function(err, results) {
                 secondLevelQueryCount += results.length;
                 for (var k = 0; k < results.length; k++) {
@@ -135,14 +136,19 @@ function obfuscate() {
                             var filename = tblConf[col].split('.')[0];
                             var property = tblConf[col].split('.')[1];
 
-                            var fakeFile = require("./" + filename);
-                            var fakeFileIndex = k
-                            if (fakeFile.length - 1 < k) {
-                                fakeFileIndex -= fakeFile.length;
-                            }
-//                            console.log("fakeFileIndex: %d", fakeFileIndex)
+                            if (filename === "value") {
+                                updateSql += col + " = " + connection.escape(property);
+                            } else {
 
-                            updateSql += col + " = " + connection.escape(fakeFile[fakeFileIndex][property]);
+                                var fakeFile = require("./" + filename);
+                                var fakeFileIndex = k
+                                if (fakeFile.length - 1 < k) {
+                                    fakeFileIndex -= fakeFile.length;
+                                }
+    //                            console.log("fakeFileIndex: %d", fakeFileIndex)
+
+                                updateSql += col + " = " + connection.escape(fakeFile[fakeFileIndex][property]);
+                            }
                         } else {
                             updateSql += col + " = null"
                         }

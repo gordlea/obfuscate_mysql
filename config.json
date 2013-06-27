@@ -29,7 +29,7 @@
     },{
         "name": "Person",
         "configs": [{
-            "where": "PersonEmail NOT LIKE '%10sheet%'",
+            "where": "PersonEmail NOT LIKE '%10sheet% and PersonId in (select ClientId from abcs.Client)",
             "id": "PersonId",
             "PersonFirstName": "fake_person.GivenName",
             "PersonLastName": "fake_person.Surname",
